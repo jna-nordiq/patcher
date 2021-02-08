@@ -34,7 +34,7 @@ const patches = [
 ];
 describe('Patch Utils', () => {
     describe('transformPath', () => {
-        it('with jsonpath format', () => {
+        it.only('with jsonpath format', () => {
             const paths = [
                 {test: ["$", "0", "name"], result: "/0/name"},
                 {test: ["$", "plugins", "desktop", "0", "name"], result: "/plugins/desktop/0/name"}

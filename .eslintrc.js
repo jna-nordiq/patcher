@@ -1,14 +1,15 @@
 module.exports = {
   root: true,
   parserOptions: {
+    babelOptions: {
+      configFile: "./babel.config.js",
+    },
     parser: "babel-eslint",
     sourceType: "module",
   },
-  extends: ["eslint:recommended"],
+  extends: ["eslint:recommended", "plugin:prettier/recommended"],
   env: {
-    browser: true,
     es6: true,
     node: true,
   },
-  plugins: [],
 };
