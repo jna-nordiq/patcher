@@ -86,3 +86,5 @@ export function mergeConfigsPatch(full, patches) {
     return applyPatch(merged, patch);
   }, full);
 }
+
+export default mergeConfigsPatch;
