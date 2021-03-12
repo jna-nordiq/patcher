@@ -134,18 +134,6 @@
   },
   { "op": "remove",
     "jsonpath": "$.plugins.desktop..[?(@.name == 'Fork')]"
-  },
-  { "op": "replace",
-    "jsonpath": "$.plugins.desktop..[?(@.name == 'DashboardEditor')].cfg",
-    "value": {
-      "catalog": {
-        "url": "https://sdigeo-free.austrocontrol.at/geoserver/free/wms",
-        "type": "wms",
-        "title": "AustroControl Inspire WMS Service",
-        "autoload": true
-      },
-      "containerPosition": "columns"
-    }
   }
 
 ]

@@ -64,32 +64,8 @@
                 "isNew": true,
                 "autoload": false
             },
-            "selectedService": "AustroControl Free WMS Service",
+            "selectedService": "Demo CSW Service",
             "services": {
-              "AustroControl Inspire WMS Service": {
-                "url": "https://sdigeo-free.austrocontrol.at/geoserver/inspire/wms",
-                "type": "wms",
-                "title": "AustroControl Inspire WMS Service",
-                "autoload": true
-              },
-              "AustroControl Free WMS Service": {
-                "url": "https://sdigeo-free.austrocontrol.at/geoserver/free/wms",
-                "type": "wms",
-                "title": "AustroControl Free WMS Service",
-                "autoload": true
-              },
-              "AustroControl Inspire CSW Service": {
-                "url": "https://sdimd-free.austrocontrol.at/geonetwork/srv/eng/csw-inspire",
-                "type": "csw",
-                "title": "AustroControl Inspire CSW Service",
-                "autoload": true
-              },
-              "AustroControl Free CSW Service": {
-                "url": "https://sdimd-free.austrocontrol.at/geonetwork/srv/eng/csw-free",
-                "type": "csw",
-                "title": "AustroControl Free CSW Service",
-                "autoload": true
-              },
               "Demo CSW Service": {
                 "url": "https://demo.geo-solutions.it/geoserver/csw",
                 "type": "csw",
@@ -756,18 +732,6 @@
           "cfg": {
             "embedPanel": false,
             "advancedSettings": false
-          }
-        },
-          {
-          "name": "DashboardEditor",
-          "cfg": {
-            "catalog": {
-              "url": "https://sdigeo-free.austrocontrol.at/geoserver/free/wms",
-              "type": "wms",
-              "title": "AustroControl Inspire WMS Service",
-              "autoload": true
-            },
-            "containerPosition": "columns"
           }
         }, {
           "name": "QueryPanel",

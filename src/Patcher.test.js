@@ -278,7 +278,7 @@ describe("Patch Utils", () => {
       }
     });
     it("testing multiple jsonpatch rules based on two different jsonpath rules", () => {
-      const plugins03 = require("./mergeConfigs/03_austro_pluginsMultiple.patch.json");
+      const plugins03 = require("./mergeConfigs/03_project_pluginsMultiple.patch.json");
       const full = require("./mergeConfigs/04_full_localConfig.json");
       try {
         const config = mergeConfigsPatch(full, plugins03);
@@ -302,10 +302,9 @@ describe("Patch Utils", () => {
       }
     });
     it("Complete test with a real scenario", () => {
-      // const resultExpected = require("./mergeConfigs/05_result_austroConfig.json");
-      const rootVars = require("./mergeConfigs/01_austro_rootVars.patch.json");
-      const stateVars = require("./mergeConfigs/02_austro_stateVars.patch.json");
-      const pluginsTest = require("./mergeConfigs/05_austro_plugins.patch.json");
+      const rootVars = require("./mergeConfigs/01_project_rootVars.patch.json");
+      const stateVars = require("./mergeConfigs/02_project_stateVars.patch.json");
+      const pluginsTest = require("./mergeConfigs/05_project_plugins.patch.json");
       const full = require("./mergeConfigs/04_full_localConfig.json");
       try {
         const config = mergeConfigsPatch(full, [
