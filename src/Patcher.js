@@ -17,25 +17,33 @@ export const transformPath = (paths) => {
 };
 
 /**
- * converts mixed rules with json path format in fully compatible json-patch rules
+ * converts mixed rules with json path or json-patch format in fully compatible json-patch rules
  * @param {object} sourceJSON usually the main json to perform research
- * @param {object[]} rawRules series of object defined with json patch format with jsonpath format for the path
- * @example rule for removing all ZoomIn plugins
+ * @param {object[]} rawRules series of object defined with support to "path" and "jsonpath" keys
+ * respectively for https://goessner.net/articles/JsonPath/ and http://jsonpatch.com/
+ *
+ * @example rule for removing a root level entry in a simple way with json-patch format
+ * {op: "remove", path: "/rootEntry"}
+ *
+ * @example rule for removing all ZoomIn plugins with jsonpath format
  * {op: "remove", jsonpath: "$.plugins..[?(@.name == 'ZoomIn')]"}
  *
- *
- * @example rule for changing config to all ZoomIn plugins
+ * @example rule for changing config to all ZoomIn plugins with jsonpath format
  * {op: "replace", jsonpath: "$.plugins..[?(@.name == 'ZoomIn')].cfg.maxZoom, value: 3}
  */
 export const convertToJsonPatch = (sourceJSON = {}, rawRules = []) => {
   const patchRules = castArray(rawRules).reduce(
-    (p, { op, jsonpath, value }) => {
+    (p, { op, jsonpath, path: jsonpatch, value }) => {
       let transformedPaths;
-      try {
-        transformedPaths = transformPath(jp.paths(sourceJSON, jsonpath));
-      } catch (e) {
-        // in this case the jsonpath lib failed because the path was not a valid jsonpath one
-        transformedPaths = [jsonpath];
+      if (jsonpatch) {
+        transformedPaths = [jsonpatch];
+      } else {
+        try {
+          transformedPaths = transformPath(jp.paths(sourceJSON, jsonpath));
+        } catch (e) {
+          // in this case the jsonpath lib failed because the path was not a valid jsonpath one
+          transformedPaths = [jsonpath];
+        }
       }
       let transformedRules = transformedPaths.map((path) => {
         let transformedRule = { op, path };
@@ -86,5 +94,3 @@ export function mergeConfigsPatch(full, patches) {
     return applyPatch(merged, patch);
   }, full);
 }
-
-export default mergeConfigsPatch;

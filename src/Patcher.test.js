@@ -34,6 +34,7 @@ const patches = [
     op: "remove",
     jsonpath: "$.plugins.desktop..[?(@.name == 'FeatureEditor')]",
   },
+  { op: "remove", path: "/plugins/desktop/0" },
 ];
 
 describe("Patch Utils", () => {
@@ -65,6 +66,12 @@ describe("Patch Utils", () => {
       expect(transformed).toEqual([
         { op: "remove", path: "/plugins/desktop/0" },
         { op: "remove", path: "/plugins/desktop/1" },
+      ]);
+    });
+    it("with jsonPatch rule with path as key", () => {
+      const transformed = convertToJsonPatch(localConfig, [patches[2]]);
+      expect(transformed).toEqual([
+        { op: "remove", path: "/plugins/desktop/0" },
       ]);
     });
     it("with json patch paths", () => {

@@ -4,8 +4,6 @@ This lib allows to use jsonpath rules inside a json patch rules
 
 ## How to use it
 
-if you want to use json path rules you can use add a jsonpath pro inside the rules,
- oother
 
 ```js
 import {mergeConfigsPatch} from '@mapstore/patcher';
@@ -18,14 +16,22 @@ const sourceFile = {
     name: "Luke"
   }]
 }
-const patchFile = [{
+const jsonPathRules = [{
   "op": "remove",
   "jsonpath": "$.name"
 }]
+const jsonPatchRules = [{
+  "op": "remove",
+  "path": "/name"
+}]
 
-const result = mergeConfigsPatch(sourceFile, patchFile);
+const resultJsonPath = mergeConfigsPatch(sourceFile, jsonPathRules);
+const resultJsonPatch = mergeConfigsPatch(sourceFile, jsonPatchRules);
 
-// console.log(result)
+console.log(resultJsonPath === resultJsonPatch)
+true
+
+console.log(resultJsonPath)
 {
   isValid: true,
   children: [{
@@ -34,14 +40,8 @@ const result = mergeConfigsPatch(sourceFile, patchFile);
 }
 ```
 
-## build
-
-we use rollup for building this
-
-`npm run build`
-
 ## references
 
 [jsonpath](https://goessner.net/articles/JsonPath/)
 
-[jsonpatch](http://jsonpatch.com/)
+[json-patch](http://jsonpatch.com/)
