@@ -1,9 +1,10 @@
 {
   "name": "@mapstore/patcher",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "",
   "main": "src/Patcher.js",
   "author": "GeoSolutions S.a.s.",
+  "private": false,
   "scripts": {
     "test": "jest",
     "build": "rollup --config",
