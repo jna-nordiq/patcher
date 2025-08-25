@@ -1,5 +1,4 @@
 import expect from "expect";
-import find from "lodash/find";
 
 import {
   transformPath,
@@ -284,17 +283,17 @@ describe("Patch Utils", () => {
         const config = mergeConfigsPatch(full, plugins03);
         expect(config).toBeTruthy();
         expect(
-          find(config.plugins.mobile, ({ name }) => name === "Search").cfg
+          config.plugins.mobile.find(({ name }) => name === "Search").cfg
             .searchOptions.services[0].options.replacedEverywhereSecondRule
         ).toBeTruthy();
 
         expect(
-          find(config.plugins.desktop, ({ name }) => name === "Search").cfg
+          config.plugins.desktop.find(({ name }) => name === "Search").cfg
             .searchOptions.services[0].options.replacedEverywhereSecondRule
         ).toBeTruthy();
 
         expect(
-          find(config.plugins.embedded, ({ name }) => name === "Search").cfg
+          config.plugins.embedded.find(({ name }) => name === "Search").cfg
             .searchOptions.services[0].options.replacedEverywhereSecondRule
         ).toBeTruthy();
       } catch (e) {
@@ -315,15 +314,8 @@ describe("Patch Utils", () => {
         expect(config).toBeTruthy();
         expect(config.mailingList).toBeFalsy();
         expect(config.proxyUrl.useCORS.length).toBe(4);
-        expect(
-          find(config.plugins.desktop, ({ name }) => name === "LayerInfo")
-        ).toBeTruthy();
-        expect(
-          find(
-            config.plugins.desktop,
-            ({ name }) => name === "IdentifySettings"
-          )
-        ).toBeTruthy();
+        expect(config.plugins.desktop.find(({ name }) => name === "LayerInfo")).toBeTruthy();
+        expect(config.plugins.desktop.find(({ name }) => name === "IdentifySettings")).toBeTruthy();
       } catch (e) {
         expect(e).toBe(false);
       }

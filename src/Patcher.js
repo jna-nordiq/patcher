@@ -1,19 +1,15 @@
 import jiff from "jiff";
 import jp from "jsonpath";
-import isArray from "lodash/isArray";
-import isString from "lodash/isString";
-
-import castArray from "lodash/castArray";
 
 /**
  * convert paths from jsonpath format to json patch format
  * @param {object[]} paths array of paths in jsonpath format
  */
 export const transformPath = (paths) => {
-  if (isArray(paths)) {
+  if (Array.isArray(paths)) {
     return paths.map(([, ...other]) => ["", ...other].join("/"));
   }
-  return isString(paths) ? paths : "";
+  return typeof paths === "string" ? paths : "";
 };
 
 /**
@@ -32,7 +28,11 @@ export const transformPath = (paths) => {
  * {op: "replace", jsonpath: "$.plugins..[?(@.name == 'ZoomIn')].cfg.maxZoom, value: 3}
  */
 export const convertToJsonPatch = (sourceJSON = {}, rawRules = []) => {
-  const patchRules = castArray(rawRules).reduce(
+  if (!Array.isArray(rawRules)) {
+    rawRules = [rawRules];
+  }
+
+  const patchRules = rawRules.reduce(
     (p, { op, jsonpath, path: jsonpatch, value }) => {
       let transformedPaths;
       if (jsonpatch) {
